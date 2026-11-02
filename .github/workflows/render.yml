@@ -1,21 +1,36 @@
 name: Render Pisa Short
+
 on:
   workflow_dispatch:
+
+permissions:
+  contents: read
+
 jobs:
   render:
     runs-on: ubuntu-latest
     timeout-minutes: 360
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm install
-      - name: Render vertical video
-        run: npx remotion render src/index.ts PisaShort out/pisa-video.mp4 --codec=h264 --crf=16 --scale=1.3333
-      - name: Upload MP4
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Render video
+        run: |
+          mkdir -p out
+          npx remotion render src/index.tsx PisaShort out/pisa-final.mp4 --codec=h264 --crf=16
+
+      - name: Upload video
         uses: actions/upload-artifact@v4
         with:
           name: pisa-final-video
-          path: out/pisa-video.mp4
+          path: out/pisa-final.mp4
           retention-days: 7
