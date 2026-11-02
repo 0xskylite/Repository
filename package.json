@@ -1,0 +1,26 @@
+{
+  "name": "pisa-short-remotion",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts PisaShort out/pisa-final.mp4 --codec=h264 --crf=16 --scale=1.3333",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.300",
+    "@remotion/three": "^4.0.300",
+    "@react-three/fiber": "^8.17.10",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.300",
+    "three": "^0.170.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/three": "^0.170.0",
+    "typescript": "^5.7.2",
+    "@types/node": "^22.10.2"
+  }
+}
